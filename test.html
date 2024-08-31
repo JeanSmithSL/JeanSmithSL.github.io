@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Page</title>
+
+
+    <script>
+        function makeGetRequest(url) {
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", url, true);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 && xhr.status == 200)
+                    console.log(JSON.parse(xhr.responseText));
+            }
+            xhr.send();
+
+            xhr.onerror = function(err) {
+                alert("Error making request. Check console logs for more details.");
+            };
+        }
+    </script>
+</head>
+<body>
+    Port: <input type="text" id="port" value="30000">
+    <button onclick="makeGetRequest('http://127.0.0.1:' + document.getElementById('port').value + '/open')">Open Drawer</button>
+</body>
+</html>
